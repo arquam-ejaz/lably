@@ -47,8 +47,8 @@ public class TestController {
     }
 
     @GetMapping("/hello4")
-    public ArrayList helloName4(@RequestParam String name, @RequestParam String age) {
-        ArrayList arrayList = new ArrayList<>();
+    public ArrayList<String> helloName4(@RequestParam String name, @RequestParam String age) {
+        ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add(name);
         arrayList.add(age);
         return arrayList;

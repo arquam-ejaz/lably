@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.xfactor.lably.entity.Admin;
 import com.xfactor.lably.entity.Lab;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     ArrayList<Lab> labs = new ArrayList<>();
+    ArrayList<Admin> admins = new ArrayList<>();
 
     // @RequestMapping(method = RequestMethod.GET)
     @GetMapping
@@ -52,18 +54,44 @@ public class TestController {
         return arrayList;
     }
 
+    @PostMapping("/addLab")
+    public Lab addLab(@RequestBody Lab lab) {
+        labs.add(lab);
+        return lab;
+    }
+
     @GetMapping("/getLabs")
     public ArrayList<Lab> getLabs() {
         return labs;
     }
 
-    @PostMapping("/addLab")
-    public Lab addLab(@RequestBody Lab lab) {
-        String name = lab.getName();
-        name = "Hello " + name;
-        lab.setName(name);
-        labs.add(lab);
-        return lab;
+    @GetMapping("/getLab")
+    public Lab getLab(@RequestParam String name) {
+        for (Lab lab : labs){
+            System.out.println(lab.getName());
+            if (lab.getName().equals(name))
+                return lab;
+        }
+        return null;
+    }
+
+    @PostMapping("/addAdmin")
+    public Admin addAdmin(@RequestBody Admin admin) {
+        admins.add(admin);
+        return admin;
+    }
+
+    @GetMapping("/getAdmins")
+    public ArrayList<Admin> getAdmins() {
+        return admins;
+    }
+
+    @GetMapping("/getAdmin")
+    public Admin getAdmin(@RequestParam String username) {
+        for (Admin admin : admins)
+            if (admin.getUsername().equals(username))
+                return admin;
+        return null;
     }
 
     // // http://localhost:8080/test/hello/xfactor
